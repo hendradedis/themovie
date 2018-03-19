@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View , TextInput, ActivityIndicator,Image} from 'react-native';
+import { StyleSheet, Text, View , TextInput, ActivityIndicator,Image,Dimensions} from 'react-native';
 import Footerbudget from './component/footerbudget';
 import Navigation from './component/navigation' ;
 import flexDirection from './component/flexbox';
@@ -12,14 +12,19 @@ export default class App extends React.Component {
     constructor() {
       super()
       this.data = [];
+      
     }
-
+     
     state = {
       isLoading : true,
       konten : {}
     }
+      
+
     componentDidMount() {
+      var {height, width}= Dimensions.get('window');
       const data = [];
+      console.log('test height' + height)
       fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=d17b14bf30e6e5442255051b425e62ae&language=en-US&page=1s', {
         method: 'GET',
       }).then((response => {
@@ -49,13 +54,15 @@ render() {
                       style={{width: 375, height: 450, alignItems: 'center' , backgroundColor:'pink',justifyContent:'center', resizeMode:('stretch') }}
                       source={{uri: imgUrl}}
                     />
-                    <Text style ={{alignItems: 'center', justifyContent: 'center'}}>{value.title}</Text>
+                    <Text>{value.title}</Text>
                     </View>
                 )
               }
             )
 
           }
+          
+          
         </ScrollView>
       )
       
@@ -63,14 +70,13 @@ render() {
   }
 }
 
-//  const styles = StyleSheet.create({
-//    container: {
-//      flex: 1,
-//      backgroundColor: 'pink',
-//      alignItems: 'center',
-//      justifyContent: 'center'
+ const styles = StyleSheet.create({
+   container: {
+   color : 'blue',
+   fontWeight: 'bold',
+   fontSize: 45,
 
-//      }})
+     }})
 
 //      TextStyle:  {
 //       alignItems: 'center',
